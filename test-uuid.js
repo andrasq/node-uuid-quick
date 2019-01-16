@@ -31,7 +31,7 @@ module.exports = {
         },
 
         'ids should not have many shared bytes': function(t) {
-            for (var nloops=0; nloops<1000; nloops++) {
+            for (var nloops=0; nloops<10000; nloops++) {
                 var buf1 = new Buffer(uuid());
                 var buf2 = new Buffer(uuid());
                 var sameCount = 0;
@@ -40,12 +40,16 @@ module.exports = {
                     if (!diff) sameCount += 1;
                 }
                 // minimum 5 identical bytes, and 1 that is the same 25% of the time
-                t.ok(sameCount < 16);
+                // note: node-v0.10 through v5.8 often share 16-17 bytes in common
+                // note: node-v6 through v10 generates much better random numbers,
+                // node-v11 again occasionally shares 16 bytes (a lot less often)
+                t.ok(sameCount <= 18);
             }
             t.done();
         },
 
         'should not have stuck bits': function(t) {
+            // the shared-bytes test above also detects bytes that are always zero or do not change
             t.skip();
         },
     },
