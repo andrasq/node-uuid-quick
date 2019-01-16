@@ -56,8 +56,7 @@ function arrayConcat(a) {
 // Arrays are a good compromise, fast enough on all versions.
 function setChars( buf, n, pos ) {
     for (var i=0; i<8; i+=2) {
-        n *= 256;
-        var byte = n & 0xFF;
+        n *= 0x100;
         buf[pos+i+0] = hexchars[n & 0xF0];
         buf[pos+i+1] = hexchars[n & 0x0F];
         n -= Math.floor(n);
