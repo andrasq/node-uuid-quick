@@ -54,6 +54,8 @@ function arrayConcat(a) {
     return s;
 }
 
+// Set 9 chars in buf starting at offset pos from the value n.
+// N must be a float float between 0 and 1 with at least 36 bits of precision.
 // note: node-v8 is very slow to copy into a Buffer, node-v10 is very fast
 // Arrays are a good compromise, fast enough on all versions.
 function copyin9c( buf, n, pos ) {
