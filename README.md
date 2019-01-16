@@ -3,7 +3,7 @@ uuid-quick
 [![Build Status](https://api.travis-ci.org/andrasq/node-uuid-quick.svg?branch=master)](https://travis-ci.org/andrasq/node-uuid-quick?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/andrasq/node-uuid-quick/badge.svg?branch=master)](https://coveralls.io/github/andrasq/node-uuid-quick?branch=master)
 
-Quicker UUIDs.
+Quicker fast UUIDs.
 
 My try at nudging the state of the art past the 1 million UUIDs per second barrier.
 

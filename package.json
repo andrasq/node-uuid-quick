@@ -1,7 +1,7 @@
 {
   "name": "uuid-quick",
   "version": "0.1.0",
-  "description": "quicker uuid",
+  "description": "quicker uuid, very fast",
 
   "main": "uuid.js",
   "license": "Apache-2.0",
