@@ -51,9 +51,10 @@ function arrayConcat(a) {
 }
 
 // Set 9 chars in buf starting at offset pos from the value n.
-// N must be a float float between 0 and 1 with at least 36 bits of precision.
+// N must be a float between 0 and 1 with at least 36 bits of precision.
 // note: node-v8 is very slow to copy into a Buffer, node-v10 is very fast
 // Arrays are a good compromise, fast enough on all versions.
+// Using a hexmap object is half the speed, and so is a long array.
 function setChars( buf, n, pos ) {
     for (var i=0; i<8; i+=2) {
         n *= 0x100;
