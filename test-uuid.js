@@ -30,6 +30,21 @@ module.exports = {
             t.done();
         },
 
+        'ids should not have many shared bytes': function(t) {
+            for (var nloops=0; nloops<1000; nloops++) {
+                var buf1 = new Buffer(uuid());
+                var buf2 = new Buffer(uuid());
+                var sameCount = 0;
+                for (var i=0; i<buf1.length; i++) {
+                    var diff = buf1[i] ^ buf2[i];
+                    if (!diff) sameCount += 1;
+                }
+                // minimum 5 identical bytes, and 1 that is the same 25% of the time
+                t.ok(sameCount < 16);
+            }
+            t.done();
+        },
+
         'should not have stuck bits': function(t) {
             t.skip();
         },
