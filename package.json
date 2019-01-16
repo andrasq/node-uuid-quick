@@ -1,0 +1,17 @@
+{
+  "name": "uuid-quick",
+  "version": "0.1.0",
+  "description": "quicker uuid",
+
+  "main": "uuid.js",
+  "license": "Apache-2.0",
+  "readme": "see README.md in the repo",
+  "repository": { "type": "git", "url": "git+https://git@github.com/andrasq/node-quick-uuid.git" },
+  "keywords": [ "fast", "Andras", "faster", "fastest", "uuid", "quick" ],
+
+  "scripts": {
+    "test": "qnit test-*",
+    "coverage": "nyc -r text -r lcov npm test",
+    "clean": "rm -rf .nyc_output/ coverage/"
+  }
+}
