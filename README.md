@@ -14,6 +14,20 @@ Summary
     const uuid = require('uuid-quick');
     let id = uuid();
 
+Speed:
+
+    $ node benchmark.js
+
+    qtimeit=0.21.0 node=10.15.0 v8=6.8.275.32-node.45 platform=linux kernel=4.9.0-0.bpo.4-amd64 up_threshold=false
+    arch=ia32 mhz=4182 cpuCount=8 cpu="Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz"
+    name               speed           rate
+    uuid             423,440 ops/sec    212 >
+    node-uuid        422,849 ops/sec    211 >
+    fast-uuid        767,277 ops/sec    384 >>
+    uuid-quick     2,103,027 ops/sec   1052 >>>>>
+    mongoid-js    24,542,177 ops/sec  12271 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 Api
 ---
 
