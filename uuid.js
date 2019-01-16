@@ -21,6 +21,7 @@ toStruct(uuid);
 
 
 var hexchars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+for (var i=0; i<16; i++) hexchars[i * 16] = hexchars[i];        // map high nybble too
 
 // template from fast-uuid.js: "10000000-1000-4000-8000-100000000000";
 var arr = new Array(36);
@@ -54,11 +55,14 @@ function arrayConcat(a) {
 // note: node-v8 is very slow to copy into a Buffer, node-v10 is very fast
 // Arrays are a good compromise, fast enough on all versions.
 function setChars( buf, n, pos ) {
-    for (var i=0; i<9; i++) {
-        n *= 16;
-        buf[pos+i] = hexchars[n & 0xF];
+    for (var i=0; i<8; i+=2) {
+        n *= 256;
+        var byte = n & 0xFF;
+        buf[pos+i+0] = hexchars[n & 0xF0];
+        buf[pos+i+1] = hexchars[n & 0x0F];
         n -= Math.floor(n);
     }
+    buf[pos+8] = hexchars[(n * 16) & 0xF];
     return;
 }
 
