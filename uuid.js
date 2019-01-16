@@ -27,15 +27,10 @@ var arr = new Array(36);
 function uuid_4() {
     var rand = uuid.rand;
 
-    var n1 = Math.floor(rand() * 0x1000000000);
-    var n2 = Math.floor(rand() * 0x1000000000);
-    var n3 = Math.floor(rand() * 0x1000000000);
-    var n4 = Math.floor(rand() * 0x1000000000);
-
-    copyin9c(arr, n1, 0);
-    copyin9c(arr, n2, 9);
-    copyin9c(arr, n3, 18);
-    copyin9c(arr, n4, 27);
+    setChars(arr, rand(), 0);
+    setChars(arr, rand(), 9);
+    setChars(arr, rand(), 18);
+    setChars(arr, rand(), 27);
 
     arr[8] = '-';
     arr[13] = '-';
@@ -58,10 +53,11 @@ function arrayConcat(a) {
 // N must be a float float between 0 and 1 with at least 36 bits of precision.
 // note: node-v8 is very slow to copy into a Buffer, node-v10 is very fast
 // Arrays are a good compromise, fast enough on all versions.
-function copyin9c( buf, n, pos ) {
+function setChars( buf, n, pos ) {
     for (var i=0; i<9; i++) {
+        n *= 16;
         buf[pos+i] = hexchars[n & 0xF];
-        n /= 16;
+        n -= Math.floor(n);
     }
     return;
 }
