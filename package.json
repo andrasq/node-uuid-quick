@@ -6,7 +6,7 @@
   "main": "uuid.js",
   "license": "Apache-2.0",
   "readme": "see README.md in the repo",
-  "repository": { "type": "git", "url": "git+https://git@github.com/andrasq/node-quick-uuid.git" },
+  "repository": { "type": "git", "url": "git+https://git@github.com/andrasq/node-uuid-quick.git" },
   "keywords": [ "fast", "Andras", "faster", "fastest", "uuid", "quick" ],
 
   "scripts": {
