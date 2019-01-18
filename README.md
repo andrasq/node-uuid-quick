@@ -31,7 +31,7 @@ inherent in the nature of these UUIDS, they have to be random in every position 
 sequential generators have redundancies that can be optimized out.
 
 
-Api
+API
 ---
 
 ### uuid( )
