@@ -39,8 +39,8 @@ API
 The `uuid-quick` package exports a function that returns Version 4 UUID strings.  These are 32
 random hexadecimal characters separated by 4 dashes `-` grouped 8-4-4-4-12 in the form
 "11111111-1111-4111-8111-111111111111", where "1" is a hex digit, "4" is the letter '4', and "8"
-is one of '8', '9', 'a' or 'b'.  (Careful readers will count only 30.5 random hex characters.
-I, umm, approximated.)
+is one of '8', '9', 'a' or 'b'.  (I said 32, but careful readers will count only 30.5 random hex
+characters. I, umm, approximated.)
 
     const uuid = require('uuid-quick');
     let id = uuid();
