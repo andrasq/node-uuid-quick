@@ -17,16 +17,16 @@ Summary
     $ node benchmark.js
 
     qtimeit=0.21.0 node=10.15.0 v8=6.8.275.32-node.45 platform=linux kernel=4.9.0-0.bpo.4-amd64 up_threshold=false
-    arch=ia32 mhz=4182 cpuCount=8 cpu="Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz"
-    name               speed           rate
-    uuid             421,067 ops/sec    211 >
-    node-uuid        416,714 ops/sec    208 >
-    fast-uuid        768,761 ops/sec    384 >>
-    uuid-quick     2,243,520 ops/sec   1122 >>>>>>
-    mongoid-js    24,694,558 ops/sec  12347 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    arch=ia32 mhz=4183 cpuCount=8 cpu="Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz"
+    name                     speed           rate
+    uuid                   423,029 ops/sec    212
+    node-uuid              417,133 ops/sec    209
+    fast-uuid              766,254 ops/sec    383 >
+    uuid-quick           2,229,696 ops/sec   1115 >>
+    mongoid-js short    34,198,722 ops/sec  17099 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 The results look pretty good, 3-5x faster than the more common uuid packages.  Still much much
-slower than sequential id generators like `mongoid-js`.  This latter 10x speed difference is
+slower than sequential id generators like `mongoid-js`.  This latter 15x speed difference is
 inherent in the nature of these UUIDS, they have to be random in every position each time;
 sequential generators have redundancies that can be optimized out.
 
