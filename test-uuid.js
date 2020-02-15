@@ -2,6 +2,10 @@
 
 var uuid = require('./');
 
+// from qibl-1.3.0
+var nodeMajor = parseInt(process.versions.node);
+var newBuffer = eval('nodeMajor < 10 ? Buffer : function(a, b, c) { return typeof(a) === "number" ? Buffer.allocUnsafe(a) : Buffer.from(a, b, c) }');
+
 module.exports = {
     'package': {
         'should export expected properties': function(t) {
@@ -32,8 +36,8 @@ module.exports = {
 
         'ids should not have many shared bytes': function(t) {
             for (var nloops=0; nloops<10000; nloops++) {
-                var buf1 = new Buffer(uuid());
-                var buf2 = new Buffer(uuid());
+                var buf1 = newBuffer(uuid());
+                var buf2 = newBuffer(uuid());
                 var sameCount = 0;
                 for (var i=0; i<buf1.length; i++) {
                     var diff = buf1[i] ^ buf2[i];

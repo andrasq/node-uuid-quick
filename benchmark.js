@@ -1,6 +1,6 @@
 if (/qnit/.test(process.argv[1])) return;
 
-// npm install qtimeit uuid node-uuid hyperid mongoid-js
+// npm install qtimeit uuid node-uuid hyperid mongoid-js fast-uuid
 
 var qtimeit = require('qtimeit');
 var uuidquick = require('./');
