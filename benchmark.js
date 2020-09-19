@@ -46,7 +46,7 @@ var mongoidFactory = new mongoidjs.MongoId();
 qtimeit.bench.timeGoal = .2;
 qtimeit.bench.showRunDetails = false;
 qtimeit.bench.visualize = true;
-qtimeit.bench.baselineAvg = 2000000;
+//qtimeit.bench.baselineAvg = 2000000;
 qtimeit.bench.bargraphScale = 2;
 qtimeit.bench.opsPerTest = 2;
 
@@ -63,6 +63,12 @@ qtimeit.bench({
     //'nanoid': function() { x = nanoid(); x2 = nanoid() },
     //'hyperid': function() { x = hyperid(); x2 = hyperid() }, // not a uuid, is fixed uuid+counter
     //'mongoid-js': function() { x = mongoidjs(); x2 = mongoidjs() },
+    //'mongoid-js': function() { x = mongoidFactory.fetch(); x2 = mongoidFactory.fetch() },
+    //'mongoid-js short': function() { x = mongoidFactory.fetchShort(); x2 = mongoidFactory.fetchShort() },
+});
+
+qtimeit.bench({
+    'uuid-quick': function() { x = uuidquick(); x2 = uuidquick() },
     //'mongoid-js': function() { x = mongoidFactory.fetch(); x2 = mongoidFactory.fetch() },
     'mongoid-js short': function() { x = mongoidFactory.fetchShort(); x2 = mongoidFactory.fetchShort() },
 });
