@@ -7,6 +7,8 @@ Quicker fast UUIDs.
 
 My try at nudging the state of the art past the 1 million UUIDs per second barrier.
 
+RFC at https://tools.ietf.org/html/rfc4122
+
 
 Summary
 -------
