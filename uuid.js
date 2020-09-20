@@ -25,7 +25,7 @@ var CH_4 = 0x34;
 var CH_8 = 0x38;
 var CH_DASH = 0x2D;
 
-// fromCharCode is with many args is faster but only since node-v0.11; spread args faster since node-v8
+// fromCharCode with many args is faster but only since node-v0.11; spread args faster since node-v8
 // In newer node versions fromCharCode.apply is also fast, but spread args are faster.
 // fromCharCode.apply is only fast since node-v8, spread args are faster but were 30x slower before v8
 // Node before v0.11 is slow with multi-arg fromCharCode and is faster with a convert-char-at-a-time loop.
