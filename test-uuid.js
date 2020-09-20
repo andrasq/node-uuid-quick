@@ -54,10 +54,26 @@ module.exports = {
         },
 
         'should not have stuck bits': function(t) {
+            // node before v6 had less than 48 bits of entropy in Math.random(), and had stuck bits even at 1e6 loops
+            if (parseInt(process.versions.node) < 6) t.skip();
+
             // the shared-bytes test above also detects bytes that are always zero or do not change
-            var ones =  'ffffffff-ffff-4fff-bfff-ffffffffffff'.split('');
-            var zeros = '00000000-0000-4000-8000-000000000000'.split('');
-            t.skip();
+            var ones =  'ffffffff-ffff-ffff-ffff-ffffffffffff'.split('').map(hexval);
+            var zeros = '00000000-0000-0000-0000-000000000000'.split('').map(hexval);
+            for (var nloops=0; nloops<1000; nloops++) {
+                var id = uuid();
+                for (var i=0; i<id.length; i++) ones[i] &= hexval(id[i]);       // gather zero bits
+                for (var i=0; i<zeros.length; i++) zeros[i] |= hexval(id[i]);   // gather one bits
+            }
+
+            // all variable bits should have seen a 1
+            t.deepEqual(zeros, [15,15,15,15,15,15,15,15, 0, 15,15,15,15, 0, 4,15,15,15, 0, 11,15,15,15, 0, 15,15,15,15,15,15,15,15,15,15,15,15]);
+
+            // all variable bits should have seen a 0
+            t.deepEqual(ones, [0,0,0,0,0,0,0,0,          0, 0,0,0,0,     0, 4,0,0,0,    0, 8,0,0,0,     0, 0,0,0,0,0,0,0,0,0,0,0,0]);
+
+            t.done();
+            function hexval(ch) { return ch === '-' ? 0 : ch >= 'a' ? (ch.charCodeAt(0) - 0x61 + 10) : (ch.charCodeAt(0) - 0x30) }
         },
     },
 }
