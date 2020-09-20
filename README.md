@@ -19,7 +19,7 @@ Overview
 `uuid-quick` is a fast Version 4 (random) UUID generator (see RFC Section 4.4, page 14).
 The new version 0.2.0 is almost twice as version 0.1.0 was.
 
-Note that fast-uuid does not on older node.
+Note that fast-uuid breaks on older node.
 
     $ node benchmark.js
 
