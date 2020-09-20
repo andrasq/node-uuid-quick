@@ -73,6 +73,7 @@ Must return floating-point values between 0 and 1 with at least 48 bits of preci
 Changelog
 ---------
 
+- 0.3.0 - fix randomness on older than node-v6
 - 0.2.0 - rewrite, now 2x faster
 - 0.1.0 - first version
 

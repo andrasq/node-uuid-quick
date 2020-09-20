@@ -35,7 +35,7 @@ module.exports = {
         },
 
         'ids should not have many shared bytes': function(t) {
-            if (parseInt(process.versions.node) < 6) t.skip();
+            var maxSameCount = 0;
             for (var nloops=0; nloops<10000; nloops++) {
                 var buf1 = newBuffer(uuid());
                 var buf2 = newBuffer(uuid());
@@ -44,19 +44,16 @@ module.exports = {
                     var diff = buf1[i] ^ buf2[i];
                     if (!diff) sameCount += 1;
                 }
+                if (sameCount > maxSameCount) maxSameCount = sameCount;
                 // minimum 5 identical bytes, and 1 that is the same 25% of the time
-                // note: node-v0.10 through v5.8 often share 16-17 bytes in common (18-23 on Ryzen)
-                // note: node-v6 through v10 generates much better random numbers,
-                // node-v11 again occasionally shares 16 bytes (a lot less often)
-                t.ok(sameCount <= 18);
+                // note: node-v0.10 through v5 often share 16-17 bytes in common (more on Ryzen), and v11 too
+                t.ok(sameCount <= 16, "too many identical bytes: " + sameCount);
             }
+            console.log("AR: most identical bytes out of 10k pairs of ids", maxSameCount);
             t.done();
         },
 
         'should not have stuck bits': function(t) {
-            // node before v6 had less than 48 bits of entropy in Math.random(), and had stuck bits even at 1e6 loops
-            if (parseInt(process.versions.node) < 6) t.skip();
-
             // the shared-bytes test above also detects bytes that are always zero or do not change
             var ones =  'ffffffff-ffff-ffff-ffff-ffffffffffff'.split('').map(hexval);
             var zeros = '00000000-0000-0000-0000-000000000000'.split('').map(hexval);

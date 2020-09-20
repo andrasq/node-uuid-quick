@@ -11,13 +11,16 @@
 
 module.exports = uuid;
 
+// node before v6 had a 32-bit Math.random, we need at least 48 (check with Math.random.toString(16))
+var rand48 = eval('true && function() { return Math.random() + Math.random()/0x100000000 }');
+var rand = eval('(parseInt(process.versions.node) >= 6) ? Math.random : rand48');
+
 function uuid() {
     return uuid_4();
 };
 uuid.uuid = uuid_4;
 uuid.v4 = uuid_4;
-// node-v0.8, 0.10, 5.8 have poor random number generators, sharing 20-30 bits between results
-uuid.rand = Math.random;
+uuid.rand = rand;
 toStruct(uuid);
 
 var CH_1 = 0x31;
