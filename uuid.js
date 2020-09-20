@@ -23,11 +23,6 @@ uuid.v4 = uuid_4;
 uuid.rand = rand;
 toStruct(uuid);
 
-var CH_1 = 0x31;
-var CH_4 = 0x34;
-var CH_8 = 0x38;
-var CH_DASH = 0x2D;
-
 // fromCharCode with many args is faster but only since node-v0.11; spread args faster since node-v8
 // In newer node versions fromCharCode.apply is also fast, but spread args are faster.
 // fromCharCode.apply is only fast since node-v8, spread args are faster but were 30x slower before v8
@@ -36,7 +31,6 @@ function tryEval(s) { try { return eval(s) } catch (e) {} }
 var fromCharCodeLoop = eval("true && function(a) { var s = ''; for (var i=0; i<a.length; i++) s += String.fromCharCode(a[i]); return s }");
 var fromCharCodeSpread = tryEval("true && function(a) { return String.fromCharCode(...a) }");
 var fromCharCode = eval("parseInt(process.versions.node) >= 9 ? fromCharCodeSpread : fromCharCodeLoop");
-
 
 // uuid v4 template: "10000000-1000-4000-8000-100000000000"
 //   where 1,0 = [0-9a-f], 4 = 4-bit version 0b0100 [4], 8: 0b10xx [89ab]
@@ -49,12 +43,12 @@ function uuid_4() {
     setChars12(arr, rand(), 12);
     setChars12(arr, rand(), 24);
 
-    arr[8]  = CH_DASH;
-    arr[13] = CH_DASH;
-    arr[14] = CH_4;
-    arr[18] = CH_DASH
-    arr[19] = hexmap[8 + (arr[19] & 3)];
-    arr[23] = CH_DASH;
+    arr[8]  = 0x2d; // -
+    arr[13] = 0x2d; // -
+    arr[14] = 0x34; // 4
+    arr[18] = 0x2d; // -
+    arr[19] = hexmap[8 + (arr[19] & 3)]; // [89ab]
+    arr[23] = 0x2d; // -
 
     return fromCharCode(arr);
 }
@@ -68,7 +62,6 @@ function setChars12( buf, n, pos ) {
         buf[pos + i + 1] = hexmap[(n >>> 4) & 0xF];
         buf[pos + i + 2] = hexmap[(n >>> 8) & 0xF];
     }
-    return;
 }
 
 function toStruct(obj) { return toStruct.prototype = obj }
