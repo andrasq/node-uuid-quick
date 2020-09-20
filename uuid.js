@@ -38,7 +38,7 @@ var fromCharCodeSpread = tryEval("true && function(a) { return String.fromCharCo
 var fromCharCode = eval("parseInt(process.versions.node) >= 9 ? fromCharCodeSpread : fromCharCodeLoop");
 
 
-// uuid template: "10000000-1000-4000-8000-100000000000"
+// uuid v4 template: "10000000-1000-4000-8000-100000000000"
 //   where 1,0 = [0-9a-f], 4 = 4-bit version 0b0100 [4], 8: 0b10xx [89ab]
 var hexmap = [0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66];
 var arr = new Array(36);
@@ -53,7 +53,7 @@ function uuid_4() {
     arr[13] = CH_DASH;
     arr[14] = CH_4;
     arr[18] = CH_DASH
-    arr[19] = CH_8 + (arr[19] & 3);
+    arr[19] = hexmap[8 + (arr[19] & 3)];
     arr[23] = CH_DASH;
 
     return fromCharCode(arr);

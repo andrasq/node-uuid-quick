@@ -19,10 +19,14 @@ module.exports = {
     },
 
     'uuid_4': {
-        'should generate a 36-byte string': function(t) {
-            var id = uuid();
-            t.equal(typeof id, 'string');
-            t.equal(id.length, 36);
+        'should generate a 36-byte string of the right format': function(t) {
+            var format = /[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/;
+            for (var i=0; i<100000; i++) {
+                var id = uuid();
+                t.equal(typeof id, 'string');
+                t.equal(id.length, 36);
+                t.ok(format.test(id), id);
+            }
             t.done();
         },
 
