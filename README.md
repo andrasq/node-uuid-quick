@@ -24,22 +24,23 @@ Note that fast-uuid breaks on older node.
     $ node benchmark.js
 
     qtimeit=0.21.0 node=10.15.0 v8=6.8.275.32-node.45 platform=linux kernel=5.5.0-1-amd64 up_threshold=false
-    arch=ia32 mhz=4482[os] cpuCount=16 cpu="AMD Ryzen 7 3800X 8-Core Processor"
+    arch=ia32 mhz=4475[os] cpuCount=16 cpu="AMD Ryzen 7 3800X 8-Core Processor"
     name               speed           rate
-    uuid             277,767 ops/sec   1000 >>
-    node-uuid        304,581 ops/sec   1097 >>
-    fast-uuid        871,343 ops/sec   3137 >>>>>>
-    uuid-quick     4,892,916 ops/sec  17615 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    uuid             276,453 ops/sec   1000 >>
+    node-uuid        302,496 ops/sec   1094 >>
+    fast-uuid        870,710 ops/sec   3150 >>>>>>
+    uuid-quick     4,816,218 ops/sec  17421 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 If only uniqueness is needed, then a good sequential id generator like e.g. `mongoid-js` can be
 much faster than even the fastest uuid.  This speed difference is inherent in UUID's, they have to be
 random at avery position; sequential generators have redundancies that can be optimized out.
 
     qtimeit=0.21.0 node=10.15.0 v8=6.8.275.32-node.45 platform=linux kernel=5.5.0-1-amd64 up_threshold=false
-    arch=ia32 mhz=4480[os] cpuCount=16 cpu="AMD Ryzen 7 3800X 8-Core Processor"
+    arch=ia32 mhz=4475[os] cpuCount=16 cpu="AMD Ryzen 7 3800X 8-Core Processor"
     name                     speed           rate
-    uuid-quick           4,961,158 ops/sec   1000 >>
-    mongoid-js short    34,117,176 ops/sec   6877 >>>>>>>>>>>>>>
+    uuid-quick           4,973,014 ops/sec   1000 >>
+    mongoid-js short    37,694,410 ops/sec   7580 >>>>>>>>>>>>>>>
+    2.308u 0.065s 0:02.18 108.2%    0+0k 0+0io 0pf+0w
 
 
 API
