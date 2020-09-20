@@ -19,6 +19,8 @@ Overview
 `uuid-quick` is a fast Version 4 (random) UUID generator (see RFC Section 4.4, page 14).
 The new version 0.2.0 is almost twice as version 0.1.0 was.
 
+Note that fast-uuid does not on older node.
+
     $ node benchmark.js
 
     qtimeit=0.21.0 node=10.15.0 v8=6.8.275.32-node.45 platform=linux kernel=5.5.0-1-amd64 up_threshold=false

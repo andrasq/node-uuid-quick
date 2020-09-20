@@ -16,6 +16,7 @@ function uuid() {
 };
 uuid.uuid = uuid_4;
 uuid.v4 = uuid_4;
+// node-v0.8, 0.10, 5.8 have poor random number generators, sharing 20-30 bits between results
 uuid.rand = Math.random;
 toStruct(uuid);
 
@@ -33,6 +34,9 @@ var fromCharCodeLoop = eval("true && function(a) { var s = ''; for (var i=0; i<a
 var fromCharCodeSpread = tryEval("true && function(a) { return String.fromCharCode(...a) }");
 var fromCharCode = eval("parseInt(process.versions.node) >= 9 ? fromCharCodeSpread : fromCharCodeLoop");
 
+
+// uuid template: "10000000-1000-4000-8000-100000000000"
+//   where 1,0 = [0-9a-f], 4 = 4-bit version 0b0100 [4], 8: 0b10xx [89ab]
 var hexmap = [0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66];
 var arr = new Array(36);
 function uuid_4() {
