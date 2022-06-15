@@ -39,7 +39,7 @@ var arr = new Array(36);
 function uuid_4() {
     var rand = uuid.rand;
 
-    setChars12(arr, rand(), 0);
+    setChars12(arr, rand(), 0);         // TODO: for uuid-v7, setChars12(arr, Date.now(), 0)
     setChars12(arr, rand(), 12);
     setChars12(arr, rand(), 24);
 
@@ -52,6 +52,9 @@ function uuid_4() {
 
     return fromCharCode(arr);
 }
+
+// TODO: uuid_7: 48 bits (12 chars) ms timestamp, 4 bits ver 0111, 12 bits rand_a, 2 bits var (type) 10, 62 bits rand_b
+// https://www.ietf.org/id/draft-peabody-dispatch-new-uuid-format-03.html
 
 // extract 12 4-bit values into buf from the value n, to offets [pos..pos+11]
 // n must be a random float between 0 and 1 with at least 48 bits of precision.
