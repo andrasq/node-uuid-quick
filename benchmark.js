@@ -4,6 +4,7 @@ if (/qnit/.test(process.argv[1])) return;
 
 var qtimeit = require('qtimeit');
 var uuidquick = require('./');
+var getId = require('../qibl').makeGetId('-test-');
 
 // require but guard against parse errors
 function tryRequire(path) { try { return require(path) } catch (e) { return {} } }
@@ -23,7 +24,7 @@ var x, x2;
 
 var mongoidFactory = new mongoidjs.MongoId();
 
-qtimeit.bench.timeGoal = .2;
+qtimeit.bench.timeGoal = .15;
 qtimeit.bench.showRunDetails = false;
 qtimeit.bench.visualize = true;
 qtimeit.bench.bargraphScale = 2;
@@ -34,6 +35,7 @@ if (uuid) bench['uuid'] = function() { x = uuid(); x2 = uuid() };
 if (nodeuuid) bench['node-uuid'] = function() { x = nodeuuid(); x2 = nodeuuid() };
 if (fastuuid) bench['fast-uuid'] = function() { x = fastuuid(); x2 = fastuuid() };
 if (uuidquick) bench['uuid-quick'] = function() { x = uuidquick(); x2 = uuidquick() };
+// if (getId) bench['qibl.getId'] = function() { x = getId(); x2 = getId() };
 
 // other ids
 //'shortid': function() { x = shortid(); x2 = shortid() },     // very slow
@@ -42,9 +44,13 @@ if (uuidquick) bench['uuid-quick'] = function() { x = uuidquick(); x2 = uuidquic
 
 qtimeit.bench(bench);
 
+qtimeit.bench.timeGoal = .15;
 qtimeit.bench({
     'uuid-quick': function() { x = uuidquick(); x2 = uuidquick() },
     //'mongoid-js': function() { x = mongoidjs(); x2 = mongoidjs() },
     //'mongoid-js': function() { x = mongoidFactory.fetch(); x2 = mongoidFactory.fetch() },
     'mongoid-js short': function() { x = mongoidFactory.fetchShort(); x2 = mongoidFactory.fetchShort() },
+    'qibl.getId': function() { x = getId(); x2 = getId() },
 });
+
+console.log("AR: q-id =", x);

@@ -17,7 +17,7 @@ Overview
     let id = uuid();
 
 `uuid-quick` is a fast Version 4 (random) UUID generator (see RFC Section 4.4, page 14).
-The new version 0.2.0 is almost twice as version 0.1.0 was.
+The new version 0.2.0 is almost twice as fast as version 0.1.0 was.
 
 Note that fast-uuid breaks on older node.
 
@@ -69,7 +69,7 @@ same as `uuid()`
 
 the random number generator function to use.  By default this property is set to `Math.random`.
 Must return floating-point values between 0 and 1 with at least 48 bits of precision.
-
+Math.random before node-v6 returned only 32 bits, there `rand` combines two random values.
 
 Changelog
 ---------
