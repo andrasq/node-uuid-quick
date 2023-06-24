@@ -9,8 +9,12 @@
   "repository": { "type": "git", "url": "git+https://git@github.com/andrasq/node-uuid-quick.git" },
   "keywords": [ "fast", "Andras", "faster", "fastest", "uuid", "quick" ],
 
+  "devDependencies": {
+    "qnit": "x"
+  },
+
   "scripts": {
-    "test": "qnit test-*",
+    "test": "node -v; qnit test-*",
     "coverage": "nyc -r text -r lcov npm test",
     "clean": "rm -rf .nyc_output/ coverage/"
   }
